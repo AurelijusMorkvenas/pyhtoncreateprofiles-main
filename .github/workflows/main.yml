@@ -24,15 +24,15 @@ jobs:
         run: pip install Faker
       # lägg till create csv file
       - name: create csv file
-        run: python .\generate.py
+        run: python generate.py
    
       # lägg till Create JSON file
       - name: Create JSON file
-        run: python .\csvtojson.py
+        run: python csvtojson.py
 
       # Köra enhetstester     
       - name: kör tests.py 
-        run: python .\tests.py
+        run: python tests.py
 
       - name: Copy to dist
         run: |
