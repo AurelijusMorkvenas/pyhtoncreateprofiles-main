@@ -12,21 +12,28 @@ permissions:
   
 jobs:
   build:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest    
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:    
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!      
 
-        
-      # lägg till create csv file (glöm inte pip install)
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest 
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps: 
+         # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+      - name: pip install Faker
+        run: pip install Faker
+      # lägg till create csv file
+      - name: create csv file
+        run: python .\generate.py
+   
       # lägg till Create JSON file
-      # Köra ehnetstester     
-      #python .\calculateTests.py 
+      - name: Create JSON file
+        run: python .\csvtojson.py
+
+      # Köra enhetstester     
+      - name: kör tests.py 
+        run: python .\tests.py
+
       - name: Copy to dist
         run: |
           mkdir dist
