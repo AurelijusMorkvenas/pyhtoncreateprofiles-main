@@ -8,7 +8,7 @@ class TestFileContents(unittest.TestCase):
         with open('profiles1.csv', 'r') as file:
             reader = csv.reader(file)
             columns = next(reader)
-            self.assertEqual(len(columns), 10)
+            self.assertEqual(len(columns), 12)
 
     def testcsvrows(self):
         with open('profiles1.csv', 'r') as file:
