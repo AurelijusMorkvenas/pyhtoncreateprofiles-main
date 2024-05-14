@@ -15,4 +15,4 @@ CI/CD Pipeline:
     -Verifies that the JSON file contains all the required properties.
     -Verifies that the JSON file contains 900+ rows.
 
-- deploys index.html + script.js + data.json to Github Pages
+-deploys index.html + script.js + data.json to Github Pages
