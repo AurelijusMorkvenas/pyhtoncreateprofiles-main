@@ -17,35 +17,46 @@ jobs:
     runs-on: ubuntu-latest 
 
     # Steps represent a sequence of tasks that will be executed as part of the job
-    steps: 
-         # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    steps:
+       
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
+
+      # Install the Faker library required for data generation
       - name: pip install Faker
         run: pip install Faker
-      # lägg till create csv file
+
+      # Generate CSV file with fake data
       - name: create csv file
         run: python generate.py
    
-      # lägg till Create JSON file
+      # Convert the generated CSV file to JSON format
       - name: Create JSON file
         run: python csvtojson.py
 
-      # Köra enhetstester     
+      # Run unit tests to validate CSV and JSON files     
       - name: kör tests.py 
         run: python tests.py
 
+      # Copy necessary files to the dist directory
       - name: Copy to dist
         run: |
           mkdir dist
           cp index.html dist/index.html
           cp data.json dist/data.json
-          cp script.js dist/script.js      
+          cp script.js dist/script.js 
+          
+      # Setup GitHub Pages
       - name: Setup Pages
         uses: actions/configure-pages@v5
+
+      # Upload the dist directory as an artifact
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: 'dist'
+
+      # Deploy the dist directory to GitHub Pages
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
